@@ -16,7 +16,7 @@
                 <input type="text" name="name"  placeholder="请输名称" value="{{ request("name") }}" autocomplete="off" class="layui-input">
             </div>
             <div class="layui-inline layui-show-xs-block">
-                <input type="text" name="email"  placeholder="请输邮箱" value="{{ request("email") }}" autocomplete="off" class="layui-input">
+                <input type="text" name="email"  placeholder="请输账号" value="{{ request("email") }}" autocomplete="off" class="layui-input">
             </div>
             <div class="layui-inline layui-show-xs-block">
                 <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
@@ -41,7 +41,7 @@
             <thead>
             <tr>
                 <th lay-data="{field:'name'}">名称</th>
-                <th lay-data="{field:'email'}">邮箱</th>
+                <th lay-data="{field:'email'}">账号</th>
                 <th lay-data="{field:'status'}">状态</th>
                 <th lay-data="{field:'created_at'}">创建时间</th>
                 <th lay-data="{field:'updated_at'}">更新时间</th>

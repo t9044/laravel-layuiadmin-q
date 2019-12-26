@@ -8,9 +8,9 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">邮箱</label>
+            <label class="layui-form-label">账号</label>
             <div class="layui-input-block">
-                <input type="text" name="email" required value="{{ old("email") }}"  lay-verify="email" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+                <input type="text" name="email" required value="{{ old("email") }}"  lay-verify="email" placeholder="请输账号" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">

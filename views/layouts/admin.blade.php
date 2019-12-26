@@ -18,7 +18,7 @@
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="/vendor/laravel-layui-admin/images/30.jpeg" class="layui-nav-img">
+                    {{--<img src="/vendor/laravel-layui-admin/images/30.jpeg" class="layui-nav-img">--}}
                     {{ auth("admin")->user()->name }}
                 </a>
                 <dl class="layui-nav-child">

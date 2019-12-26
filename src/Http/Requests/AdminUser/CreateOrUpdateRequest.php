@@ -33,7 +33,7 @@ class CreateOrUpdateRequest extends FormRequest
         switch ($this->method()) {
             case 'POST':
                 $rules['password'] = 'required|min:8|max:32';
-                $rules['email'] = 'required|email|unique:admin_users';
+                $rules['email'] = 'required|unique:admin_users';
                 break;
             case 'PATCH':
                 $rules['password'] = 'nullable|min:8|max:32';
