@@ -13,4 +13,11 @@ class PermissionGroup extends Model
     {
         return $this->hasMany('Moell\LayuiAdmin\Models\Permission', 'pg_id');
     }
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->setTable(config('admin.model_permission_groups'));
+    }
 }

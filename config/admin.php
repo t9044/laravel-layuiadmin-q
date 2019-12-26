@@ -11,4 +11,7 @@ return [
     ],
 
     'system_name' => env("ADMIN_SYSTEM_NAME", "后台管理系统"),
+
+    'model_navigation'=>'admin_navigation',
+    'model_permission_groups'=>'admin_permission_groups',
 ];

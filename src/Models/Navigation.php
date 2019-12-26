@@ -10,4 +10,11 @@ class Navigation extends Model
     protected $table = 'navigation';
 
     protected $fillable = ['parent_id', 'name', 'icon', 'uri', 'is_link', 'guard_name', 'type', 'permission_name', 'sequence'];
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->setTable(config('admin.model_navigation'));
+    }
 }
