@@ -99,7 +99,7 @@ class AdminUserController extends Controller
     public function assignRolesForm($id)
     {
         $adminUser = AdminUser::query()->findOrFail($id);
-        $roles = Role::query()->where("guard_name", "admin")->get();
+        $roles = Role::query()->get();
         $userRoles = $adminUser->getRoleNames();
 
         return view("admin::admin_user.assign_role", compact("roles", "adminUser", "userRoles"));
