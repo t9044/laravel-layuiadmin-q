@@ -65,12 +65,12 @@
         </div>
     </div>
 
-    <div class="layui-footer">
+   {{-- <div class="layui-footer">
         ©
         <a href="https://github.com/moell-peng/laravel-layui-admin" target="_blank">
             moell/laravel-layui-admin
         </a>
-    </div>
+    </div>--}}
 </div>
 <script src="{{ asset('vendor/laravel-layui-admin/lib/layui/layui.js') }}"></script>
 <script src="{{ asset('vendor/laravel-layui-admin/js/admin.js') }}"></script>
