@@ -24,14 +24,18 @@
             <div class="layui-input-block">
                 <select name="guard_name" lay-verify="required">
                     <option value=""></option>
-                    {!! admin_enum_option_string("guard_names") !!}
+                    {!! admin_enum_option_string("guard_names", 'admin') !!}
                 </select>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">导航类型</label>
             <div class="layui-input-block">
-                <input type="text" name="type" required value="admin"  lay-verify="required" placeholder="请输入导航类型" autocomplete="off" class="layui-input">
+                {{--<input type="text" name="type" required value="admin"  lay-verify="required" placeholder="请输入导航类型" autocomplete="off" class="layui-input">--}}
+                <select name="type" lay-verify="required">
+                    <option value=""></option>
+                    {!! admin_enum_option_string("navigation_type") !!}
+                </select>
             </div>
         </div>
         <div class="layui-form-item">
