@@ -3,7 +3,8 @@
 return [
 
     'navigation_type' => [
-        'admin' => '后台系统'
+        'admin' => '后台系统',
+        'backend' => '管理后台',
     ],
 
     'guard_names' => [

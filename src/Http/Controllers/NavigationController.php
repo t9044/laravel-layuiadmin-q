@@ -6,6 +6,7 @@ namespace Moell\LayuiAdmin\Http\Controllers;
 use Illuminate\Http\Request;
 use Moell\LayuiAdmin\Http\Requests\Navigation\CreateOrUpdateRequest;
 use Moell\LayuiAdmin\Models\Navigation;
+use Moell\LayuiAdmin\Models\Permission;
 
 class NavigationController extends Controller
 {
@@ -32,7 +33,8 @@ class NavigationController extends Controller
 
     public function create()
     {
-        return view("admin::navigation.create");
+        $permissions = Permission::get();
+        return view("admin::navigation.create", compact('permissions'));
     }
 
     public function store(CreateOrUpdateRequest $request)
@@ -44,7 +46,9 @@ class NavigationController extends Controller
 
     public function edit(Navigation $navigation)
     {
-        return view("admin::navigation.edit", compact("navigation"));
+        $permissions = Permission::where('guard_name', $navigation->guard_name)->get();
+
+        return view("admin::navigation.edit", compact("navigation", "permissions"));
     }
 
     /**

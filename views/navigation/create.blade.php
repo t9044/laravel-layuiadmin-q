@@ -20,11 +20,14 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">Guard</label>
+            <label class="layui-form-label">关联权限</label>
             <div class="layui-input-block">
-                <select name="guard_name" lay-verify="required">
-                    <option value=""></option>
-                    {!! admin_enum_option_string("guard_names", 'admin') !!}
+                {{--<input type="text" name="permission_name" required value=""  lay-verify="required" placeholder="请输入关联权限" autocomplete="off" class="layui-input">--}}
+                <select name="permission_name" lay-verify="" lay-search>
+                    <option value="">无权限</option>
+                    @foreach ($permissions as $permission)
+                        <option value="{{$permission->name}}">{{$permission->display_name}}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -39,9 +42,12 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">关联权限</label>
+            <label class="layui-form-label">Guard</label>
             <div class="layui-input-block">
-                <input type="text" name="permission_name" required value=""  lay-verify="required" placeholder="请输入关联权限" autocomplete="off" class="layui-input">
+                <select name="guard_name" lay-verify="required">
+                    <option value=""></option>
+                    {!! admin_enum_option_string("guard_names", 'admin') !!}
+                </select>
             </div>
         </div>
         <div class="layui-form-item">

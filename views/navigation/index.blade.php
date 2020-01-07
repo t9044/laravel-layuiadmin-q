@@ -13,7 +13,10 @@
     <div class="layui-card-body ">
         <form class="layui-form layui-col-space5" id="search-form">
             <div class="layui-inline layui-show-xs-block">
-                <input type="text" name="type"  placeholder="请输入导航类型" value="{{ request("type") }}" autocomplete="off" class="layui-input">
+                <select name="type">
+                    <option value="">请选择导航类型</option>
+                    {!! admin_enum_option_string("navigation_type", request("type")) !!}
+                </select>
             </div>
             <div class="layui-inline layui-show-xs-block">
               <select name="guard_name">
@@ -104,8 +107,8 @@
               title: '操作',
               align: 'center',
               template: function(item){
-                return '@if(admin_user_can("navigation.destroy"))<a lay-filter="delete">删除</a>   @endif ' +
-                        '@if(admin_user_can("navigation.edit"))<a  lay-filter="edit">编辑</a>@endif';
+                return '@if(admin_user_can("navigation.edit"))<a class="layui-btn layui-btn-xs" lay-filter="edit">编辑</a>@endif' +
+                    '@if(admin_user_can("navigation.destroy"))<a class="layui-btn layui-btn-xs layui-btn-danger" lay-filter="delete">删除</a>   @endif ';
               }
             }
           ]
@@ -116,7 +119,7 @@
         });
 
         treeTable.on('tree(edit)', function (data) {
-          admin.openLayerForm("/admin/navigation/" + data.item.id + "/edit", "编辑", 'PATCH', '700px', '500px');
+          admin.openLayerForm("/admin/navigation/" + data.item.id + "/edit", "编辑", 'PATCH', '750px', '600px');
         });
       });
     </script>
