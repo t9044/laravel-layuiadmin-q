@@ -42,7 +42,7 @@
     });
   };
 
-  Admin.prototype.openLayerForm = function (url, title, method, width, height, noRefresh, formId) {
+  Admin.prototype.openLayerForm = function (url, title, method, width, height, noRefresh, formId, success) {
     var formId = formId ? formId : "#layer-form";
     $.get(url, function(view) {
       layui.layer.open({
@@ -53,6 +53,7 @@
         content: view,
         success: function() {
           layui.form.render();
+            success && success();
         },
         area:[
           width ? width : '50%',

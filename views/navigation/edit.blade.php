@@ -10,7 +10,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">上级菜单ID</label>
             <div class="layui-input-block">
-                <input type="text" name="parent_id" required value="{{ $navigation->parent_id }}"  lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+                <input type="text" id="parent_id" lay-filter="parent_id" name="parent_id" required value="{{ $navigation->parent_id }}"  lay-verify="required" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -25,8 +25,12 @@
                 {{--<input type="text" name="permission_name" required value="{{ $navigation->permission_name }}"  lay-verify="required" placeholder="请输入关联权限" autocomplete="off" class="layui-input">--}}
                 <select name="permission_name" lay-verify="" lay-search>
                     <option value="">无权限</option>
-                    @foreach ($permissions as $permission)
-                        <option value="{{$permission->name}}" {{$permission->name == $navigation->permission_name ? 'selected' : ''}}>{{$permission->display_name}}</option>
+                    @foreach($permissions as $key=>$permissionList)
+                        <optgroup label="{{$key}}">
+                            @foreach ($permissionList as $permission)
+                                <option value="{{$permission->name}}">{{$permission->display_name}}</option>
+                            @endforeach
+                        </optgroup>
                     @endforeach
                 </select>
             </div>

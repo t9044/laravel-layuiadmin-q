@@ -17,4 +17,13 @@ class Navigation extends Model
 
         $this->setTable(config('admin.model_navigation'));
     }
+
+    public static function getTree()
+    {
+        $items = Navigation::query()
+            ->orderBy('sequence', 'desc')
+            ->get();
+
+        return make_tree($items->toArray());
+    }
 }

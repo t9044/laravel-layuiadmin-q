@@ -29,7 +29,7 @@
             </div>
             <div class="layui-inline layui-show-xs-block">
                 @if(admin_user_can("navigation.create"))
-                    <a class="layui-btn" onclick="admin.openLayerForm('{{ route("navigation.create") }}', '添加', 'POST', '700px', '500px')"><i class="layui-icon"></i>添加</a>
+                    <a class="layui-btn newNav" onclick=""><i class="layui-icon"></i>添加</a>
                 @endif
             </div>
         </form>
@@ -41,12 +41,13 @@
 
 @section("script")
     <script>
-      layui.use(['form', 'table', 'treeTable'], function(){
+      layui.use(['form', 'table', 'treeTable', 'treeSelect'], function(){
         var table = layui.table;
         var form = layui.form;
         table.init("table-hide");
 
         var treeTable = layui.treeTable;
+        var treeSelect = layui.treeSelect;
         treeTable.render({
           elem: '#tree-table',
           data: {!! $navigation !!},
@@ -114,12 +115,59 @@
           ]
         });
 
+          openSuccess = () =>{
+              treeSelect.render({
+                  // 选择器
+                  elem: '#parent_id',
+                  // 数据
+                  data: {!! $navigationTree !!},
+                  // 异步加载方式：get/post，默认get
+                  // 占位符
+                  placeholder: '请选择上级菜单',
+                  // 是否开启搜索功能：true/false，默认false
+                  search: false,
+                  // 一些可定制的样式
+                  style: {
+                      folder: {
+                          // enable: true
+                      },
+                      line: {
+                          enable: true
+                      }
+                  },
+                  // 点击回调
+                  click: function(d){
+                      // console.log(d);
+                  },
+                  // 加载完成后的回调函数
+                  success: function (d) {
+                      // console.log(d);
+//                选中节点，根据id筛选
+                      var val = $('#parent_id').val();
+                      if(val !== '') {
+                          treeSelect.checkNode('parent_id', val);
+                          treeSelect.refresh('parent_id');
+                      }
+                      // console.log($('#parent_id').val());
+//                获取zTree对象，可以调用zTree方法
+//                       var treeObj = treeSelect.zTree('parent_id');
+//                       console.log(treeObj);
+//                刷新树结构
+//                       treeSelect.refresh('parent_id');
+                  }
+              });
+          };
+
+        $('.newNav').click(function () {
+            admin.openLayerForm('{{ route("navigation.create") }}', '添加', 'POST', '700px', '500px', false, false, openSuccess);
+        });
+
         treeTable.on('tree(delete)', function (data) {
           admin.tableDataDelete("/admin/navigation/" + data.item.id, data, true);
         });
 
         treeTable.on('tree(edit)', function (data) {
-          admin.openLayerForm("/admin/navigation/" + data.item.id + "/edit", "编辑", 'PATCH', '750px', '600px');
+          admin.openLayerForm("/admin/navigation/" + data.item.id + "/edit", "编辑", 'PATCH', '750px', '600px', false, false, openSuccess);
         });
       });
     </script>
