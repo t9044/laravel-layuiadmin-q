@@ -205,7 +205,9 @@ function(c,a,b,f){(!a||!d.isHidden(c,a))&&s.apply(e,arguments)};var t=e.repairPa
   TreeSelect.prototype.render = function (options) {
     var elem = options.elem,
       // 请求地址
-      data = options.data,
+      url = options.url,
+      //数据
+      data = options.data || [],
       // 请求头
       headers = options.headers,
       // 请求方式
@@ -238,29 +240,39 @@ function(c,a,b,f){(!a||!d.isHidden(c,a))&&s.apply(e,arguments)};var t=e.repairPa
 
     var a = {
       init: function () {
-        $.ajax({
-          url: data,
-          type: type,
-          headers: headers,
-          dataType: 'json',
-          success: function (d) {
+
+        var succ = function(d){
             DATA = d;
             a.hideElem().input().toggleSelect().loadCss().preventEvent();
             $.fn.zTree.init($('#' + TREE_SELECT_BODY_ID), a.setting(), d);
             TREE_OBJ = $.fn.zTree.getZTreeObj(TREE_SELECT_BODY_ID);
             if (search) {
-              a.searchParam();
+                a.searchParam();
             }
             a.configStyle();
             if (success) {
-              var obj = {
-                treeId: TREE_SELECT_ID,
-                data: d
-              };
-              success(obj);
+                var obj = {
+                    treeId: TREE_SELECT_ID,
+                    data: d
+                };
+                success(obj);
             }
-          }
-        });
+        };
+
+        if(url){
+            $.ajax({
+                url: url,
+                type: type,
+                headers: headers,
+                dataType: 'json',
+                success: function (d) {
+                    succ(d);
+                }
+            });
+        }else{
+          succ(data);
+        }
+
         return a;
       },
       // 检查input是否有默认值
