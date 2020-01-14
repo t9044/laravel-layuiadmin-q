@@ -46,7 +46,8 @@
 
             </div>
         </div>
-        <div class="layui-form-item">
+        <input type="hidden" name="type" value="admin">
+        {{--<div class="layui-form-item">
             <label class="layui-form-label">Guard</label>
             <div class="layui-input-block">
                 <select name="guard_name" lay-verify="required">
@@ -54,7 +55,7 @@
                     {!! admin_enum_option_string("guard_names", $navigation->guard_name) !!}
                 </select>
             </div>
-        </div>
+        </div>--}}
         <div class="layui-form-item">
             <label class="layui-form-label">icon</label>
             <div class="layui-input-block">
