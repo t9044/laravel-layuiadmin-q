@@ -45,7 +45,7 @@
                 </select>
             </div>
         </div>
-        <input type="hidden" name="type" value="admin">
+        <input type="hidden" name="guard_name" value="admin">
         {{--<div class="layui-form-item">
             <label class="layui-form-label">Guard</label>
             <div class="layui-input-block">
