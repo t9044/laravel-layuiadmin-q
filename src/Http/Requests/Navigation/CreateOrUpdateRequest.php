@@ -30,7 +30,8 @@ class CreateOrUpdateRequest extends FormRequest
             'name' => 'required',
             'guard_name' => 'required',
             'is_link' => 'in:0,1',
-            'uri' => 'required'
+            'uri' => 'required',
+            'type' => 'required'
         ];
     }
 }
