@@ -120,6 +120,7 @@
                   // 选择器
                   elem: '#parent_id',
                   // 数据
+                  {{--data: {!! $navigationTree !!},--}}
                   data: {!! $navigationTree !!},
                   // 异步加载方式：get/post，默认get
                   // 占位符
@@ -144,7 +145,7 @@
                       // console.log(d);
 //                选中节点，根据id筛选
                       var val = $('#parent_id').val();
-                      if(val !== '') {
+                      if(val !== '' && typeof a !== 'undefined') {
                           treeSelect.checkNode('parent_id', val);
                           treeSelect.refresh('parent_id');
                       }
