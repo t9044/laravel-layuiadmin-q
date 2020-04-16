@@ -42,6 +42,7 @@
             <tr>
                 <th lay-data="{field:'name'}">名称</th>
                 <th lay-data="{field:'email'}">账号</th>
+                <th lay-data="{field:'phone'}">手机号</th>
                 <th lay-data="{field:'status'}">状态</th>
                 <th lay-data="{field:'created_at'}">创建时间</th>
                 <th lay-data="{field:'updated_at'}">更新时间</th>
@@ -53,6 +54,7 @@
                 <tr>
                     <td>{{ $adminUser->name }}</td>
                     <td>{{ $adminUser->email }}</td>
+                    <td>{{ $adminUser->phone }}</td>
                     <td>{{ $adminUser->status == 0 ? '启用' : '禁用' }}</td>
                     <td>{{ $adminUser->created_at }}</td>
                     <td>{{ $adminUser->updated_at }}</td>

@@ -38,7 +38,7 @@ class AdminUserController extends Controller
     public function store(CreateOrUpdateRequest $request)
     {
         $data = $request->only([
-            'name', 'email', 'password'
+            'name', 'email', 'password', 'phone'
         ]);
         $data['password'] = bcrypt($data['password']);
 
@@ -65,11 +65,12 @@ class AdminUserController extends Controller
     public function update(CreateOrUpdateRequest $request, AdminUser $adminUser)
     {
         $data = $request->only([
-            'name', 'status'
+            'name', 'status', 'phone'
         ]);
 
         if ($request->filled('password')) {
             $data['password'] = bcrypt($request->password);
+
         }
 
         $adminUser->fill($data);

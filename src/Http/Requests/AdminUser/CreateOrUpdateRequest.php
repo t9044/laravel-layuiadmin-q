@@ -27,7 +27,8 @@ class CreateOrUpdateRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => 'required|max:255'
+            'name' => 'required|max:255',
+            'phone' => 'required|digits:11'
         ];
 
         switch ($this->method()) {
