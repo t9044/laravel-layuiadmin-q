@@ -28,6 +28,10 @@
             <div class="layui-btn-container">
                 @if(admin_user_can("admin-user.create"))
                     <a class="layui-btn layui-btn-sm" onclick="admin.openLayerForm('{{ route("admin-user.create") }}', '添加', 'POST', '500px', '350px')"><i class="layui-icon"></i>添加</a>
+                    <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" onclick="exportTpl()">导出(模板)</button>
+
+                    <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="chooseTemplate" style="">导入数据</button>
+                    {{--<button type="button" class="layui-btn layui-btn-sm" id="beginImport">开始导入</button>--}}
                 @endif
             </div>
         </script>
@@ -82,10 +86,16 @@
 
 @section("script")
     <script>
-      layui.use(['form', 'table'], function(){
+        function exportTpl() {
+            window.open('{{url('admin/admin-user-tpl')}}');
+        }
+
+      layui.use(['form', 'table', 'upload'], function(){
 
         var table = layui.table;
+        var upload = layui.upload;
         table.init("table-hide");
+
 
         table.on("tool(table-hide)", function(obj) {
           console.log(obj);
@@ -98,6 +108,35 @@
                 break;
             }
         });
+
+        console.log($('#chooseTemplate'));
+          upload.render({
+              elem: '#chooseTemplate'
+              ,url: "{{url('admin/admin-user-import')}}"
+              // ,auto: true
+              ,accept: 'file'
+              ,acceptMime: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+              //,multiple: true
+              // ,bindAction: '#beginImport'
+              ,choose: function (res) {
+                  /*res.preview(function (e,file) {
+                      console.log(file);
+                      $('#chooseTemplate').after('<span class="layui-inline layui-upload-choose">' + file.name + '</span>');
+                  })*/
+              }
+              ,done: function(res){
+                  if(res.status !== 'success')
+                  {
+                      layer.alert(res.message);
+                      return;
+                  }
+                  layer.msg('上传成功');
+                  window.location.reload();
+
+              },error: function(index, upload){
+
+              }
+          });
 
         admin.paginate("{{ $adminUsers->total() }}", "{{ $adminUsers->currentPage() }}","{{ $adminUsers->perPage() }}");
       });

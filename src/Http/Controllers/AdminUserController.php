@@ -4,9 +4,14 @@ namespace Moell\LayuiAdmin\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use Moell\LayuiAdmin\AdminExport;
+use Moell\LayuiAdmin\AdminImport;
 use Moell\LayuiAdmin\Http\Requests\AdminUser\CreateOrUpdateRequest;
 use Moell\LayuiAdmin\Models\AdminUser;
 use Spatie\Permission\Models\Role;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class AdminUserController extends Controller
 {
@@ -116,5 +121,76 @@ class AdminUserController extends Controller
         AdminUser::query()->findOrFail($id)->syncRoles($request->input('roles', []));
 
         return $this->success();
+    }
+
+
+    public function tpl()
+    {
+        return Excel::download(new AdminExport(), 'admin_user_template.xlsx');
+    }
+
+
+    public function importDataList()
+    {
+        $file = request()->file('file');
+        $array = Excel::toArray(new AdminImport(), $file, null);
+
+        $array = $array[0];
+        if (count($array) < 2) return $this->fail('导入文件格式不正确或数据为空');
+
+        array_shift($array);
+
+        $result = [];
+        DB::beginTransaction();
+        try
+        {
+            foreach ($array as $index=>$item)
+            {
+                $data = [
+                    'name'=>trim($item[0]),
+                    'phone'=>trim($item[1]),
+                    'user'=>trim($item[2]),
+                    'pwd'=>trim($item[3]),
+                    'role'=>trim($item[4]),
+                ];
+
+                $validator = Validator::make($data, [
+                    'name' => 'required',
+                    'phone' => 'required|size:11',
+                    'user' => 'required|unique:admin_users,email',
+                    'pwd' => 'required',
+                    'role' => 'required',
+                ]);
+
+                if ($validator->fails())
+                {
+                    $s = $index + 2;
+                    throw new \Exception("第{$s}行" . $validator->errors()->first());
+                }
+
+                $role = Role::where('id', $data['role'])->first();
+                if(!$role) throw new \Exception("角色id不存在");
+
+                $id = AdminUser::insertGetId([
+                    'name' => $data['name'],
+                    'email' => $data['user'],
+                    'password' => bcrypt($data['pwd']),
+                    'status' => '0',
+                    'phone'=>$data['phone'],
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'remember_token' => ''
+                ]);
+                $adminUser = AdminUser::where('id', $id)->first();
+                $adminUser->assignRole($role->name);
+
+            }
+            DB::commit();
+            return $this->success();
+        }catch (\Exception $e)
+        {
+            DB::rollBack();
+            return $this->fail($e->getMessage());
+        }
+
     }
 }

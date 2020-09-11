@@ -25,6 +25,8 @@ $router->namespace('\Moell\LayuiAdmin\Http\Controllers')
                 $router->put('admin-user/{id}/assign-roles', 'AdminUserController@assignRoles')->name('admin-user.assign-roles');
                 $router->get('role/{id}/assign-permissions', 'RoleController@assignPermissionsForm')->name('role.assign-permissions-form');
                 $router->put('role/{id}/assign-permissions', 'RoleController@assignPermissions')->name('role.assign-permissions');
+                $router->get('admin-user-tpl', 'AdminUserController@tpl');
+                $router->post('admin-user-import', 'AdminUserController@importDataList');
             });
         });
     });
