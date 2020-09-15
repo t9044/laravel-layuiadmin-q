@@ -8,7 +8,8 @@ $router->namespace('\Moell\LayuiAdmin\Http\Controllers')
     ->group(function ($router) {
         $router->get("login", "LoginController@loginShowForm")->name("admin.login-show-form");
         $router->post("login", "LoginController@login")->name("admin.login")->middleware('throttle:20,1');
-
+        $router->get('log-list', 'LogListController@list');
+        $router->get('log-open', 'LogListController@open');
         $router->middleware(['auth:admin'])->group(function($router) {
             $router->get("/", "IndexController@index")->name("admin.index");
             $router->get("logout", "LoginController@logout")->name("admin.logout");
@@ -27,6 +28,7 @@ $router->namespace('\Moell\LayuiAdmin\Http\Controllers')
                 $router->put('role/{id}/assign-permissions', 'RoleController@assignPermissions')->name('role.assign-permissions');
                 $router->get('admin-user-tpl', 'AdminUserController@tpl');
                 $router->post('admin-user-import', 'AdminUserController@importDataList');
+//                $router->get('log-list', 'LogListController@list');
             });
         });
     });
