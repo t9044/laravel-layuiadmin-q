@@ -67,12 +67,20 @@
                     shadeClose: true,
                     shade: false,
                     maxmin: true, //开启最大化最小化按钮
-                    skin: 'layui-layer-rim', //加上边框
+                    skin: 'layui-layer-demo', //加上边框
                     area:[
                         width ? width : '893px',
                         height ? height : '600px'
                     ],
-                    content: view.big().replace(/\n/g,"<br/><br/>")
+                    content:view.replace(/\n/g,"<br/>"),
+                    success: function(layero, index){
+                        layero.find('.layui-layer-content').css({
+                            'padding-left':'25px',
+                            'padding-right':'25px',
+                            "line-height":"30px",
+                            'fontSize':'15px',
+                        })
+                    }
                 });
             });
         };

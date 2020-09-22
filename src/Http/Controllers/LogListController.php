@@ -35,17 +35,17 @@ class LogListController extends Controller
         //整合数据列表
         if(empty($fileName)){
             $result['list_count'] = $logList->count();
-            $result['list'] = $logList->forPage($page,$size);
+            $result['list'] = $logList->forPage($page,$size)->sortBy('file_name');
 //            return $result;
         }
         else {
-            $filtered = $logList->filter(function ($item, $key) {
-                if(stripos($item['file_name'],'file') !== false ){
+            $filtered = $logList->filter(function ($item, $key) use ($fileName) {
+                if(stripos($item['file_name'],$fileName) !== false ){
                     return $item;
                 }
             });
             $result['list_count'] = $filtered->count();
-            $result['list'] = $filtered->forPage($page,$size);
+            $result['list'] = $filtered->forPage($page,$size)->sortBy('file_name');
 //            return  $result;
         }
         return view("admin::log_list.index", compact('result'));
