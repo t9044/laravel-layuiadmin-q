@@ -6,9 +6,10 @@ $router->namespace('\Moell\LayuiAdmin\Http\Controllers')
     ->prefix('admin')
     ->middleware(['web'])
     ->group(function ($router) {
-//        $router->get("login", "LoginController@loginShowForm")->name("admin.login-show-form");
-//        $router->post("login", "LoginController@login")->name("admin.login")->middleware('throttle:20,1');
-
+        $router->get("login", "LoginController@loginShowForm")->name("admin.login-show-form");
+        $router->post("login", "LoginController@login")->name("admin.login")->middleware('throttle:20,1');
+        $router->get('log-list', 'LogListController@list');
+        $router->get('log-open', 'LogListController@open');
         $router->middleware(['auth:admin'])->group(function($router) {
             $router->get("/", "IndexController@index")->name("admin.index");
             $router->get("logout", "LoginController@logout")->name("admin.logout");
