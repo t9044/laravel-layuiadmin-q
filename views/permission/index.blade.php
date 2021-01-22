@@ -64,11 +64,11 @@
                     <td>{{ $permission->created_at }}</td>
                     <td>{{ $permission->updated_at }}</td>
                     <td>
-                        @if(admin_user_can("permission.edit"))
+                        @if(admin_user_can("gm.setting"))
                             <a class="layui-btn layui-btn-xs"
                                 onclick="admin.openLayerForm('{{ route("permission.edit", ['permission' => $permission->id]) }}', '编辑', 'PATCH', '600px', '500px')">编辑</a>
                         @endif
-                        @if(admin_user_can('permission.destroy'))
+                        @if(admin_user_can('gm.setting'))
                             <a class="layui-btn layui-btn-xs layui-btn-danger"
                                 onclick="admin.tableDataDelete('{{ route("permission.destroy", ['permission' => $permission->id]) }}', this)">删除</a>
                         @endif

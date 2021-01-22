@@ -28,7 +28,7 @@
               <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
             </div>
             <div class="layui-inline layui-show-xs-block">
-                @if(admin_user_can("navigation.create"))
+                @if(admin_user_can("gm.nav"))
                     <a class="layui-btn newNav" onclick=""><i class="layui-icon"></i>添加</a>
                 @endif
             </div>
@@ -108,8 +108,8 @@
               title: '操作',
               align: 'center',
               template: function(item){
-                return '@if(admin_user_can("navigation.edit"))<a class="layui-btn layui-btn-xs" lay-filter="edit">编辑</a>@endif' +
-                    '@if(admin_user_can("navigation.destroy"))<a class="layui-btn layui-btn-xs layui-btn-danger" lay-filter="delete">删除</a>   @endif ';
+                return '@if(admin_user_can("gm.nav"))<a class="layui-btn layui-btn-xs" lay-filter="edit">编辑</a>@endif' +
+                    '@if(admin_user_can("gm.nav"))<a class="layui-btn layui-btn-xs layui-btn-danger" lay-filter="delete">删除</a>   @endif ';
               }
             }
           ]

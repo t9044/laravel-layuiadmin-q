@@ -23,7 +23,7 @@
     <div class="layui-card-body ">
         <script type="text/html" id="toolbar">
             <div class="layui-btn-container">
-                @if(admin_user_can("role.create"))
+                @if(admin_user_can("gm.setting"))
                     <a class="layui-btn layui-btn-sm" onclick="admin.openLayerForm('{{ route("role.create") }}', '添加', 'POST', '500px', '350px')"><i class="layui-icon"></i>添加</a>
                 @endif
             </div>
@@ -46,15 +46,15 @@
                     <td>{{ $role->created_at }}</td>
                     <td>{{ $role->updated_at }}</td>
                     <td>
-                        @if(admin_user_can("role.edit"))
+                        @if(admin_user_can("gm.setting"))
                             <a class="layui-btn layui-btn-xs"
                                onclick="admin.openLayerForm('{{ route("role.edit", ['role' => $role->id]) }}', '编辑', 'PATCH', '500px', '350px')">编辑</a>
                         @endif
-                        @if(admin_user_can("role.assign-permissions-form"))
+                        @if(admin_user_can("gm.setting"))
                             <a class="layui-btn layui-btn-xs"
                                href="{{ route("role.assign-permissions-form", ['id' => $role->id]) }}">分配权限</a>
                         @endif
-                        @if(admin_user_can("role.destroy"))
+                        @if(admin_user_can("gm.setting"))
                             <a class="layui-btn layui-btn-xs layui-btn-danger"
                                onclick="admin.tableDataDelete('{{ route("role.destroy", ['role' => $role->id]) }}', this)">删除</a>
                         @endif

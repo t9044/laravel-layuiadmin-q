@@ -44,11 +44,11 @@
                     <td>{{ $group->created_at }}</td>
                     <td>{{ $group->updated_at }}</td>
                     <td>
-                        @if(admin_user_can("permission-group.edit"))
+                        @if(admin_user_can("gm.setting"))
                             <a class="layui-btn layui-btn-xs"
                                 onclick="admin.openLayerForm('{{ route("permission-group.edit", ['permission_group' => $group->id]) }}', '编辑', 'PATCH', '500px', '200px')">编辑</a>
                         @endif
-                        @if(admin_user_can("permission-group.destroy"))
+                        @if(admin_user_can("gm.setting"))
                             <a class="layui-btn layui-btn-xs layui-btn-danger"
                                onclick="admin.tableDataDelete('{{ route("permission-group.destroy", ['permission_group' => $group->id]) }}', this)">删除</a>
                         @endif
