@@ -33,7 +33,7 @@
     <div class="layui-card-body ">
         <script type="text/html" id="toolbar">
             <div class="layui-btn-container">
-                @if(admin_user_can("permission.create"))
+                @if(admin_user_can("gm.setting"))
                 <a class="layui-btn layui-btn-sm" onclick="admin.openLayerForm('{{ route("permission.create") }}', '添加', 'POST', '600px', '500px')"><i class="layui-icon"></i>添加</a>
                 @endif
             </div>

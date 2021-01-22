@@ -26,7 +26,7 @@
     <div class="layui-card-body ">
         <script type="text/html" id="toolbar">
             <div class="layui-btn-container">
-                @if(admin_user_can("admin-user.create"))
+                @if(admin_user_can("gm.setting"))
                     <a class="layui-btn layui-btn-sm" onclick="admin.openLayerForm('{{ route("admin-user.create") }}', '添加', 'POST', '500px', '350px')"><i class="layui-icon"></i>添加</a>
                     <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" onclick="exportTpl()">导出(模板)</button>
 
