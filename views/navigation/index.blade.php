@@ -105,6 +105,14 @@
               align: 'center',
             },
             {
+              key: 'is_link',
+              title: '是否禁用',
+              align: 'center',
+                template: function (item) {
+                    return item.is_link == '0' ? '否' : '<span style="color: red">是</span>'
+                }
+            },
+            {
               title: '操作',
               align: 'center',
               template: function(item){

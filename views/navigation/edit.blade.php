@@ -72,5 +72,14 @@
                 <input type="text" name="sequence" required value="{{ $navigation->sequence }}"  lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
             </div>
         </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">禁用状态</label>
+            <div class="layui-input-block">
+                <select name="is_link" lay-verify="required">
+                    <option value="0" @if($navigation->is_link == 0) selected @endif >否</option>
+                    <option value="1" @if($navigation->is_link == 1) selected @endif >是</option>
+                </select>
+            </div>
+        </div>
     </form>
 </div>
