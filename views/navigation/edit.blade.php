@@ -28,7 +28,11 @@
                     @foreach($permissions as $key=>$permissionList)
                         <optgroup label="{{$key}}">
                             @foreach ($permissionList as $permission)
-                                <option value="{{$permission->name}}">{{$permission->display_name}}</option>
+                                @if($navigation->permission_name == $permission->name)
+                                    <option value="{{$permission->name}}" selected>{{$permission->display_name}}</option>
+                                @else
+                                    <option value="{{$permission->name}}">{{$permission->display_name}}</option>
+                                @endif
                             @endforeach
                         </optgroup>
                     @endforeach

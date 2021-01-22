@@ -116,6 +116,8 @@
         });
 
           openSuccess = () =>{
+              // form.render('select');
+
               treeSelect.render({
                   // 选择器
                   elem: '#parent_id',
@@ -145,7 +147,8 @@
                       // console.log(d);
 //                选中节点，根据id筛选
                       var val = $('#parent_id').val();
-                      if(val !== '' && typeof a !== 'undefined') {
+
+                      if(val !== '') {
                           treeSelect.checkNode('parent_id', val);
                           treeSelect.refresh('parent_id');
                       }
