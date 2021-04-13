@@ -13,8 +13,9 @@ trait NavigationTree
      * @param string $type
      * @return array
      */
-    protected function permissionNavigationTree($guardName = 'admin', $type = 'admin')
+/*    protected function permissionNavigationTree($guardName = 'admin', $type = 'admin')
     {
+
         $userPermissions = Auth::guard($guardName)->user()->getAllPermissions()->pluck('name');
         $items = Navigation::query()
             ->where('guard_name', $guardName)
@@ -26,6 +27,10 @@ trait NavigationTree
             });
 
         return make_tree($items->toArray());
+    }*/
+
+    protected function permissionNavigationTree() {
+        return make_tree(config('admin.nav'));
     }
 
     /**

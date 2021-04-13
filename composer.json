@@ -12,7 +12,8 @@
     ],
     "require": {
         "spatie/laravel-permission": "~3.0",
-        "maatwebsite/excel": "^3.1"
+        "maatwebsite/excel": "^3.1",
+        "hsk9044/lwhy-cas-client": "^0.1"
     },
     "autoload": {
         "psr-4": {

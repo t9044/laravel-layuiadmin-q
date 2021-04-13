@@ -3,7 +3,11 @@
 namespace Moell\LayuiAdmin\Http\Middleware;
 
 
+use Hsk9044\LwhyCasClient\Contracts\CasFactor;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 
 class Authenticate extends Middleware
 {
@@ -20,7 +24,11 @@ class Authenticate extends Middleware
         }
 
         if (in_array('admin', $this->guards)) {
-            return route("admin.login-show-form");
+            $url = CasFactor::make()->getLoginUrl("{$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}/admin/auth");
+
+            header("Location: {$url}");
+            exit();
+//            return route("admin.login-show-form");
         }
     }
 
@@ -28,6 +36,10 @@ class Authenticate extends Middleware
     {
         $this->guards = $guards;
 
-        parent::authenticate($request, $guards);
+        try{
+            parent::authenticate($request, $guards);
+        }catch (CasKeyInvalidException $e) {
+            Auth::guard('admin')->logout();
+        }
     }
 }
