@@ -24,11 +24,11 @@ class Authenticate extends Middleware
         }
 
         if (in_array('admin', $this->guards)) {
-            $url = CasFactor::make()->getLoginUrl("{$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}/admin/auth");
+            //$url = CasFactor::make()->getLoginUrl("{$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}/admin/auth");
 
-            header("Location: {$url}");
-            exit();
-//            return route("admin.login-show-form");
+            //header("Location: {$url}");
+           // exit();
+            return route("admin.login-show-form");
         }
     }
 
